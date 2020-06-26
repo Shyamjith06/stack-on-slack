@@ -7,14 +7,12 @@ pipelines:
         caches:
           - maven
         script:
-          - cd project_code/
           - mvn clean
     - step:
         name: maven package
         caches:
           - maven
         script:
-          - cd project_code/
           - mvn package 
           - ls target/
     - step:
@@ -22,7 +20,6 @@ pipelines:
         caches:
           - maven
         script:
-          - cd project_code/
           - pipe: JfrogDev/artifactory-maven:0.3.3
             variables:
               ARTIFACTORY_URL: $url
