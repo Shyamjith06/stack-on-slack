@@ -1,0 +1,33 @@
+image: maven:3.6.1
+
+pipelines:
+  default:
+    - step:
+        name: MAven
+        caches:
+          - maven
+        script:
+          - cd project_code/
+          - mvn clean
+    - step:
+        name: maven package
+        caches:
+          - maven
+        script:
+          - cd project_code/
+          - mvn package 
+          - ls target/
+    - step:
+        name: Artifactory Upload
+        caches:
+          - maven
+        script:
+          - cd project_code/
+          - pipe: JfrogDev/artifactory-maven:0.3.3
+            variables:
+              ARTIFACTORY_URL: '104.42.53.229:8082'
+              ARTIFACTORY_USER: 'admin'
+              ARTIFACTORY_PASSWORD: '@jfrog123456789'
+              MAVEN_SNAPSHOT_REPO: 'target/debitcardcustomer-0.0.1-SNAPSHOT.war'
+              MAVEN_RELEASE_REPO: 'dev-debit-bit'
+   
