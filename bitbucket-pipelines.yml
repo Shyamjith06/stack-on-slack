@@ -25,9 +25,9 @@ pipelines:
           - cd project_code/
           - pipe: JfrogDev/artifactory-maven:0.3.3
             variables:
-              ARTIFACTORY_URL: '104.42.53.229:8082'
-              ARTIFACTORY_USER: 'admin'
-              ARTIFACTORY_PASSWORD: '@jfrog123456789'
+              ARTIFACTORY_URL: $url
+              ARTIFACTORY_USER: $user
+              ARTIFACTORY_PASSWORD: $pass
               MAVEN_SNAPSHOT_REPO: 'target/debitcardcustomer-0.0.1-SNAPSHOT.war'
               MAVEN_RELEASE_REPO: 'dev-debit-bit'
    
