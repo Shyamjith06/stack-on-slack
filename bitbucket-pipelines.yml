@@ -16,16 +16,7 @@ pipelines:
           - mvn package 
           - ls target/
           
-    - step:
-        name: Snyk Test
-        script:
-          - pipe: snyk/snyk-scan:0.4.0
-            variables:
-               SNYK_TOKEN: $SNYK_TKN
-               LANGUAGE: "Java"
-               PROJECT_FOLDER: "target/debitcardcustomer-0.0.1-SNAPSHOT.war"
-             
-          
+   
     - step:
         name: Snyk Test1
         script:
