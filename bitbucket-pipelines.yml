@@ -19,11 +19,9 @@ pipelines:
          caches:
            - node
          script: 
-           - npm install
            - pipe: snyk/snyk-scan:0.4.0
              variables:
                SNYK_TOKEN: "$SNYK_TKN"
-               LANGUAGE: "npm" 
                DONT_BREAK_BUILD: "true"
                MONITOR: "true"
                DEBUG: "true"
