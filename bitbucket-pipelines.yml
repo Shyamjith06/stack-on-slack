@@ -21,7 +21,6 @@ pipelines:
          - maven
          script:
            - apt-get update && apt-get install -y nodejs
-           - curl -L https://npmjs.org/install.sh | sh
            - npm -version
            - npm install -g snyk
            - mvn -B install
