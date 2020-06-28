@@ -15,19 +15,37 @@ pipelines:
         script:
           - mvn package 
           - ls target/
-          
-   
     - step:
-        name: Snyk Test1
-        script:
-          - pipe: snyk/snyk-scan:0.4.0
-            variables:
-               SNYK_TOKEN: $SNYK_TKN
-               LANGUAGE: "docker"
-               IMAGE_NAME: $IMAGE_NAME
-               TARGET_FILE: "Dockerfile"
-               PROJECT_FOLDER: "target/"
-          - docker push $IMAGE_NAME
+
+             name: Snyk test
+
+             caches:
+
+               - maven
+
+             script:
+
+               - apt-get update && apt-get install -y nodejs
+
+               - curl -L https://npmjs.org/install.sh | sh
+
+               - npm -version
+
+               - npm install -g snyk 
+
+
+
+               - mvn -B install
+
+               - snyk auth $SNYK_TKN
+
+               - snyk test --all-projects 
+
+               - pipe: snyk/snyk-scan:0.4.3
+
+                 variables:
+
+                   SNYK_TOKEN: $SNYK_TKN
     - step:
         name: Artifactory Upload
         caches:
