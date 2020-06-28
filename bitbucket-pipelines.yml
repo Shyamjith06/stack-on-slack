@@ -3,7 +3,7 @@ image: maven:3.6.1
 pipelines:
   default:
     - step:
-        name: MAven
+        name: maven clean
         caches:
           - maven
         script:
@@ -22,6 +22,7 @@ pipelines:
            - pipe: snyk/snyk-scan:0.4.0
              variables:
                SNYK_TOKEN: "$SNYK_TKN"
+               LANGUAGE: "MAVEN" 
                DONT_BREAK_BUILD: "true"
                MONITOR: "true"
                DEBUG: "true"
