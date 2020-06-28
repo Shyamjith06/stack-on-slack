@@ -21,7 +21,6 @@ pipelines:
          - maven
          script:
            - apt-get update && apt-get install -y nodejs
-           - npm -version
            - npm install -g snyk
            - mvn -B install
            - snyk auth $SNYK_TKN
