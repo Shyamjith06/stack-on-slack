@@ -22,7 +22,7 @@ pipelines:
            - pipe: snyk/snyk-scan:0.4.0
              variables:
                SNYK_TOKEN: "$SNYK_TKN"
-               LANGUAGE: "MAVEN" 
+               LANGUAGE: "DOCKER" 
                DONT_BREAK_BUILD: "true"
                MONITOR: "true"
                DEBUG: "true"
