@@ -20,13 +20,17 @@ pipelines:
          caches:
            - node
          script: 
-           - pipe: snyk/snyk-scan:0.4.0
-             variables:
+          - docker build -t $IMAGE_NAME .
+          - pipe: snyk/snyk-scan:0.4.0
+            variables:
                SNYK_TOKEN: "$SNYK_TKN"
-               LANGUAGE: "DOCKER" 
+               LANGUAGE: "docker" 
                DONT_BREAK_BUILD: "true"
                MONITOR: "true"
                DEBUG: "true"
+               IMAGE_NAME: $IMAGE_NAME
+               TARGET_FILE: “Dockerfile”
+                – docker push $IMAGE_NAME
     - step:
         name: Artifactory Upload
         caches:
