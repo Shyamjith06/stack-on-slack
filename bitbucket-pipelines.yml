@@ -25,7 +25,7 @@ pipelines:
                SNYK_TOKEN: $SNYK_TKN
                LANGUAGE: "docker"
                IMAGE_NAME: $IMAGE_NAME
-              
+               TARGET_FILE: "Dockerfile"
           - docker push $IMAGE_NAME
     - step:
         name: Artifactory Upload
