@@ -21,7 +21,7 @@ pipelines:
     
           - pipe: snyk/snyk-scan:0.4.0
             variables:
-               SNYK_TOKEN: "$NYK_TKN"
+               SNYK_TOKEN: "$SNYK_TKN"
                LANGUAGE: "docker"
                IMAGE_NAME: $IMAGE_NAME
                TARGET_FILE: "Dockerfile"
