@@ -16,6 +16,7 @@ pipelines:
           - mvn package 
           - ls target/
     - step:
+         name: Snyk Test
          caches:
            - node
          script: 
