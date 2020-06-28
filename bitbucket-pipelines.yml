@@ -16,27 +16,26 @@ pipelines:
           - mvn package 
           - ls target/
     - step:
-         name: Snyk Test
-         script:
-    
+        name: Snyk Test
+        script:
           - pipe: snyk/snyk-scan:0.4.0
             variables:
-               SNYK_TOKEN: "$SNYK_TKN"
+               SNYK_TOKEN: $SNYK_TKN
                LANGUAGE: "docker"
                IMAGE_NAME: $IMAGE_NAME
                TARGET_FILE: "Dockerfile"
           - docker push $IMAGE_NAME
     - step:
-               name: Artifactory Upload
-               caches:
-                 - maven
-               script:
-                 - pipe: JfrogDev/artifactory-maven:0.3.3
-                   variables:
-                     ARTIFACTORY_URL: $url
-                     ARTIFACTORY_USER: $user
-                     ARTIFACTORY_PASSWORD: $pass
-                     MAVEN_SNAPSHOT_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
-                     MAVEN_RELEASE_REPO: 'dev-debit-bit'
+        name: Artifactory Upload
+        caches:
+          - maven
+        script:
+          - pipe: JfrogDev/artifactory-maven:0.3.3
+            variables:
+                  ARTIFACTORY_URL: $url
+                  ARTIFACTORY_USER: $user
+                  ARTIFACTORY_PASSWORD: $pass
+                  MAVEN_SNAPSHOT_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
+                  MAVEN_RELEASE_REPO: 'dev-debit-bit'
     
    
