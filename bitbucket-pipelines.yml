@@ -27,7 +27,7 @@ pipelines:
                - pipe: snyk/snyk-scan:0.4.3              
                  variables:
                    SNYK_TOKEN: $SNYK_TKN
-                   DONT_BREAK_BUILD: "true"
+                   DONT_BREAK_BUILD: "false"
                    MONITOR: "true"  
 
     - step:
