@@ -23,6 +23,7 @@ pipelines:
          - maven
          script:
            - mvn -N io.takari:maven:wrapper
+           - snyk auth $SNYK_TKN
            - snyk test --all-projects 
            - pipe: snyk/snyk-scan:0.4.3              
              variables:
