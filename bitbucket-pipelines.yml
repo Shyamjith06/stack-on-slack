@@ -14,7 +14,7 @@ pipelines:
           - maven
         script:
           - mvn package 
-          - ls target/
+      #   - ls target/
    
     - step:
         script:
