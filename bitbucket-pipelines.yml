@@ -29,6 +29,13 @@ pipelines:
                          SEVERITY_THRESHOLD: "high"
                          DONT_BREAK_BUILD: "true"
                          MONITOR: "true" 
+    - step: 
+             name: Analyze on SonarCloud
+             script:
+               - pipe: sonarsource/sonarcloud-scan:0.1.4
+                 variables:
+                   SONAR_TOKEN: ${SONAR_TOKEN}
+                   DEBUG: "true"
     
     - step:
         script:
