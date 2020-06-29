@@ -15,6 +15,22 @@ pipelines:
         script:
           - mvn package 
       #   - ls target/
+      
+    - step:
+               name: Snyk test
+               image: snyk/snyk-cli:maven-3.5.4
+               caches:
+               - maven
+               script:
+                 - mvn -N io.takari:maven:wrapper
+                 - snyk auth $SNYK_TKN
+                 - snyk test 
+                 - snyk ignore
+                 - pipe: snyk/snyk-scan:0.4.3              
+                   variables:
+                     SNYK_TOKEN: $SNYK_TKN
+                     DONT_BREAK_BUILD: "true"
+                     MONITOR: "true"  
    
     - step:
         script:
