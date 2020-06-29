@@ -25,7 +25,7 @@ pipelines:
                      ARTIFACTORY_PASSWORD: $pass
                      FILE_SPEC: 'false'
                      SOURCE_PATH: 'target/debitcardcustomer-0.0.1-SNAPSHOT.war"'
-                     TARGET_PATH: 'dev-debit-bit/'
+                     TARGET_PATH: 'dev-debit-bit'
                      MAVEN_RELEASE_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
     
    
