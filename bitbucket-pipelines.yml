@@ -15,10 +15,21 @@ pipelines:
         script:
           - mvn package 
    #      - ls target/
-      
- 
-         
-   
+    - step:
+                   name: Snyk test
+                   caches:
+                   - maven
+                   script:
+
+                     - pipe: snyk/snyk-scan:0.4.3 
+                       variables:
+                         SNYK_TOKEN: $SNYK_TKN
+                         LANGUAGE: "docker"
+                         IMAGE_NAME: snyk/snyk-cli:maven-3.5.4
+                         SEVERITY_THRESHOLD: "high"
+                         DONT_BREAK_BUILD: "true"
+                         MONITOR: "true" 
+    
     - step:
         script:
                  - pipe: JfrogDev/artifactory-generic-upload:0.3.2
