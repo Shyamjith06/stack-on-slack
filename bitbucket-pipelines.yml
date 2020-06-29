@@ -15,6 +15,15 @@ pipelines:
         script:
           - mvn package 
       #   - ls target/
+    - step: &build-test-sonarcloud
+            name: Build, test and analyze on SonarCloud
+            caches:
+              - maven
+              - sonar
+            script:
+              - mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+            artifacts:
+              - target/debitcardcustomer-0.0.1-SNAPSHOT.war
       
     - step:
                name: Snyk test
