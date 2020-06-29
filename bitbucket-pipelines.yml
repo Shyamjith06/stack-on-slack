@@ -17,8 +17,6 @@ pipelines:
           - ls target/
     - step: &sonarcloud
           name: Analyze on SonarCloud
-          caches:
-            - sonar
           script:
             - pipe: sonarsource/sonarcloud-scan:0.1.5
               variables:
