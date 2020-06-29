@@ -25,14 +25,12 @@ pipelines:
 
     - step:
          name: Snyk test
+         image: snyk/snyk-cli
          caches:
          - maven
          script:
-           - apt-get update && apt-get install -y nodejs
-           - npm install -g snyk
-           - mvn -B install
-           - snyk auth $SNYK_TKN
-           - snyk test --all-projects
+           - mvn -N io.takari:maven:wrapper
+           - snyk test --all-projects 
            - pipe: snyk/snyk-scan:0.4.3              
              variables:
                SNYK_TOKEN: $SNYK_TKN
