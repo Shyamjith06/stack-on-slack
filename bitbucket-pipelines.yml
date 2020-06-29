@@ -15,22 +15,7 @@ pipelines:
         script:
           - mvn package 
           - ls target/
-    - step:
-             name: Snyk test
-             image: snyk/snyk-cli:maven-3.5.4
-             caches:
-             - maven
-             script:
-               - mvn -N io.takari:maven:wrapper
-               - snyk auth $SNYK_TKN
-               - snyk test 
-               - pipe: snyk/snyk-scan:0.4.3              
-                 variables:
-                   SNYK_TOKEN: $SNYK_TKN
-                   ORGANIZATION: "Hyndavi_Ommu"
-                   DONT_BREAK_BUILD: "true"
-                   
-
+   
     - step:
         script:
                  - pipe: JfrogDev/artifactory-generic-upload:0.3.2
@@ -41,6 +26,6 @@ pipelines:
                      FILE_SPEC: 'false'
                      SOURCE_PATH: 'target/debitcardcustomer-0.0.1-SNAPSHOT.war'
                      TARGET_PATH: 'debit-card-sample/'
-                     MAVEN_RELEASE_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
+      #              MAVEN_RELEASE_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
     
    
