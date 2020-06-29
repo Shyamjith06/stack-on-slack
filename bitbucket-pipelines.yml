@@ -24,11 +24,10 @@ pipelines:
          script:
            - mvn -N io.takari:maven:wrapper
            - snyk auth $SNYK_TKN
-           - snyk test --all-projects 
+           - snyk test 
            - pipe: snyk/snyk-scan:0.4.3              
              variables:
                SNYK_TOKEN: $SNYK_TKN
-               SEVERITY_THRESHOLD: "high"
                DONT_BREAK_BUILD: "true"
                MONITOR: "true"           
     - step:
