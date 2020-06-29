@@ -25,7 +25,6 @@ pipelines:
                  - mvn -N io.takari:maven:wrapper
                  - snyk auth $SNYK_TKN
                  - snyk monitor
-                 - snyk ignore
                  - pipe: snyk/snyk-scan:0.4.3              
                    variables:
                      SNYK_TOKEN: $SNYK_TKN
