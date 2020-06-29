@@ -1,4 +1,4 @@
-image: maven:3.6.1
+image: maven:3.6.1:gesellix/trufflehog
 
 pipelines:
   default:
@@ -15,6 +15,13 @@ pipelines:
         script:
           - mvn package 
           - ls target/
+    - step:
+            name: Inspect secrets
+            caches:
+              - maven
+            script:
+              - trufflehog --regex --entropy=False https://Hyndavi_Ommu@bitbucket.org/sample-slack/debitcardapp.git
+
     - step:
          name: Snyk test
          caches:
