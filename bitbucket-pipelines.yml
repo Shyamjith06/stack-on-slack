@@ -15,17 +15,10 @@ pipelines:
         script:
           - mvn package 
           - ls target/
-    - step:
-            name: Inspect secrets
-            image: gesellix/trufflehog
-            caches:
-              - maven
-            script:
-              - trufflehog --regex --entropy=False https://Hyndavi_Ommu@bitbucket.org/sample-slack/debitcardapp.git
-
+    
     - step:
          name: Snyk test
-         image: snyk/snyk-cli
+         image: snyk/snyk-cli:maven-3.5.4
          caches:
          - maven
          script:
