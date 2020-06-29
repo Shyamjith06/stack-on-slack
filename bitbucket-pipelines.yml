@@ -14,30 +14,10 @@ pipelines:
           - maven
         script:
           - mvn package 
-          - ls target/
-    - step: &sonarcloud
-          name: Analyze on SonarCloud
-          script:
-            - pipe: sonarsource/sonarcloud-scan:0.1.5
-              variables:
-                SONAR_TOKEN: ${SONAR_TOKEN}
-                DEBUG: "true"
+   #      - ls target/
       
-    - step:
-               name: Snyk test
-               image: snyk/snyk-cli:maven-3.5.4
-               caches:
-               - maven
-               script:
-                 - mvn -N io.takari:maven:wrapper
-                 - snyk auth $SNYK_TKN
-                 - snyk monitor     
-                 - pipe: snyk/snyk-scan:0.4.3 
-                   variables:
-                     SNYK_TOKEN: $SNYK_TKN
-                     LANGUAGE: "DOCKER"
-                     DONT_BREAK_BUILD: "true"
-                     MONITOR: "true"  
+ 
+         
    
     - step:
         script:
