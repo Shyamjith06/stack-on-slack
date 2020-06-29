@@ -28,6 +28,10 @@ pipelines:
            - pipe: snyk/snyk-scan:0.4.3              
              variables:
                SNYK_TOKEN: $SNYK_TKN
+               SEVERITY_THRESHOLD: "high"
+               DONT_BREAK_BUILD: "true"
+               MONITOR: "true"
+
                    
     - step:
         name: Artifactory Upload
