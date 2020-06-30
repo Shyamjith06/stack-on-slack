@@ -14,26 +14,33 @@ pipelines:
           - maven
         script:
           - mvn package 
-   #      - ls target/
+          - ls target/
    
-    - step: 
-             name: Analyze on SonarCloud
-             script:
-               - pipe: sonarsource/sonarcloud-scan:0.1.4
-                 variables:
-                   SONAR_TOKEN: "$SONAR_TOKEN"
-                   DEBUG: "true"
+        clone:
+            depth: full              
+
+            definitions:
+             caches:
+             sonar: ~/.sonar/cache  
+            steps:
+            - step: &build-test-sonarcloud
+               name: Build, test and analyze on SonarCloud
+               caches:
+                 - maven
+                 - sonar
+               script:
+                 - mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+               artifacts:
+                 - target/**
+
+            pipelines:                 
+            branches:
+            dev:
+             - step: *build-test-sonarcloud
+            pull-requests:
+            '**':
+             - step: *build-test-sonarcloud
     
-    - step:
-        script:
-                 - pipe: JfrogDev/artifactory-generic-upload:0.3.2
-                   variables:
-                     ARTIFACTORY_URL: $url
-                     ARTIFACTORY_USER: $user
-                     ARTIFACTORY_PASSWORD: $pass
-                     FILE_SPEC: 'false'
-                     SOURCE_PATH: 'target/debitcardcustomer-0.0.1-SNAPSHOT.war'
-                     TARGET_PATH: 'debit-card-sample/'
-                     MAVEN_RELEASE_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
+    
     
    
