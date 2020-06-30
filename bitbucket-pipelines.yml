@@ -23,6 +23,6 @@ pipelines:
                     variables:
                       SONAR_TOKEN: $SONAR_TOKEN
                       SONAR_SCANNER_OPTS: -Xmx512m
-                      DEBUG: 'true' 
+                      DEBUG: 'false' 
     
    
