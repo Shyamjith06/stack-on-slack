@@ -14,29 +14,10 @@ pipelines:
           - maven
         script:
           - mvn package 
-   #      - ls target/
-    - step:
-                   name: Snyk test
-                   caches:
-                   - maven
-                   script:
-
-                     - pipe: snyk/snyk-scan:0.4.3 
-                       variables:
-                         SNYK_TOKEN: $SNYK_TKN
-                         LANGUAGE: "docker"
-                         IMAGE_NAME: snyk/snyk-cli:maven-3.5.4
-                         SEVERITY_THRESHOLD: "high"
-                         DONT_BREAK_BUILD: "true"
-                         MONITOR: "true" 
-    - step: 
-             name: Analyze on SonarCloud
-             script:
-               - pipe: sonarsource/sonarcloud-scan:0.1.4
-                 variables:
-                   SONAR_TOKEN: ${SONAR_TOKEN}
-                   DEBUG: "true"
-    
+          - ls target/
+   
+                    
+  
     - step:
         script:
                  - pipe: JfrogDev/artifactory-generic-upload:0.3.2
@@ -45,8 +26,8 @@ pipelines:
                      ARTIFACTORY_USER: $user
                      ARTIFACTORY_PASSWORD: $pass
                      FILE_SPEC: 'false'
-                     SOURCE_PATH: 'target/debitcardcustomer-0.0.1-SNAPSHOT.war'
+                     SOURCE_PATH: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
                      TARGET_PATH: 'debit-card-sample/'
-                     MAVEN_RELEASE_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
+                   #  MAVEN_RELEASE_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
     
    
