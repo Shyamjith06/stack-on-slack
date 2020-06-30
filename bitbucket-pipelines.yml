@@ -20,7 +20,6 @@ pipelines:
     - step: &build-test-sonarcloud
                name: Build, test and analyze on SonarCloud
                caches:
-                 - maven
                  - sonar
                script:
                  - mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
