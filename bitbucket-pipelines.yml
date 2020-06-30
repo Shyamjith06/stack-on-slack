@@ -53,7 +53,7 @@ pipelines:
                      ARTIFACTORY_PASSWORD: $pass
                      FILE_SPEC: 'false'
                      SOURCE_PATH: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
-                     TARGET_PATH: 'debit-card-sample/'
+                     TARGET_PATH: 'debit-card-application-dev/'
                    #  MAVEN_RELEASE_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
     
    
