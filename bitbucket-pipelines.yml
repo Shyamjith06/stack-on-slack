@@ -30,5 +30,5 @@ pipelines:
                      ARTIFACTORY_USER: $user
                      ARTIFACTORY_PASSWORD: $pass
                      MAVEN_SNAPSHOT_REPO: "target/debitcardcustomer-0.0.1-SNAPSHOT.war"
-                     MAVEN_RELEASE_REPO: "debit-card-application-dev/"
+                     MAVEN_RELEASE_REPO: "debit-card-application-dev-1/"
    
