@@ -45,15 +45,16 @@ pipelines:
                     
   
     - step:
+        name: uploading artifacts
         script:
                  - pipe: JfrogDev/artifactory-generic-upload:0.3.2
                    variables:
                      ARTIFACTORY_URL: $url
                      ARTIFACTORY_USER: $user
                      ARTIFACTORY_PASSWORD: $pass
-                     FILE_SPEC: 'false'
+                     FILE_SPEC: 'true'
                      SOURCE_PATH: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
                      TARGET_PATH: 'debit-card-application-dev/'
-                   #  MAVEN_RELEASE_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
+                     MAVEN_RELEASE_REPO: 'debitcardcustomer-0.0.1-SNAPSHOT.war'
     
    
