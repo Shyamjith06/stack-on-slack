@@ -15,25 +15,13 @@ pipelines:
         script:
           - mvn package 
           - ls target/
-           
-        
-    - step: &build-test-sonarcloud
-        name: Build, test and analyze on SonarCloud
-        caches:
-                 - sonar
+    - step:
+        name: Sonar
         script:
-                 - mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-        artifacts:
-                 - target/**
-
-      pipelines:                 
-            branches:
-            dev:
-             - step: *build-test-sonarcloud
-            pull-requests:
-            '**':
-             - step: *build-test-sonarcloud
-    
-    
+          - pipe: sonarsource/sonarcloud-scan:1.1.0
+            variables:
+             EXTRA_ARGS: -Dsonar.projectDescription=\"Project with sonarcloud-scan pipe\" 
+             SONAR_SCANNER_OPTS: -Xmx512m
+             DEBUG: "true"
     
    
