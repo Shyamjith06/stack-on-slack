@@ -9,19 +9,20 @@ pipelines:
         script:
           - mvn clean
     - step:
+            name: Sonar
+            script:
+              - pipe: sonarsource/sonarcloud-scan:1.1.0
+                variables:
+                 SONAR_TOKEN: '$SONAR_TOKEN'
+                 SONAR_SCANNER_OPTS: -Xmx512m
+                 DEBUG: "true"
+    - step:
         name: maven package
         caches:
           - maven
         script:
           - mvn package 
           - ls target/
-    - step:
-        name: Sonar
-        script:
-          - pipe: sonarsource/sonarcloud-scan:1.1.0
-            variables:
-             SONAR_TOKEN: '$SONAR_TOKEN'
-             SONAR_SCANNER_OPTS: -Xmx512m
-             DEBUG: "true"
+    
     
    
