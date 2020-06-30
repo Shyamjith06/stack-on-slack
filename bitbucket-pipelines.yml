@@ -15,15 +15,9 @@ pipelines:
         script:
           - mvn package 
           - ls target/
-   
-        clone:
-            depth: full              
-
-            definitions:
-             caches:
-             sonar: ~/.sonar/cache  
-            steps:
-            - step: &build-test-sonarcloud
+           
+        
+    - step: &build-test-sonarcloud
                name: Build, test and analyze on SonarCloud
                caches:
                  - maven
@@ -33,7 +27,7 @@ pipelines:
                artifacts:
                  - target/**
 
-            pipelines:                 
+      pipelines:                 
             branches:
             dev:
              - step: *build-test-sonarcloud
