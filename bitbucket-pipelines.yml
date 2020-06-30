@@ -29,7 +29,6 @@ pipelines:
                      ARTIFACTORY_URL: $url
                      ARTIFACTORY_USER: $user
                      ARTIFACTORY_PASSWORD: $pass
-                     FILE_SPEC: 'true'
-                     FILE_SPEC_PATH: './spec.json'
-                     EXTRA_ARGS: '--props="test=pass"'
+                     MAVEN_SNAPSHOT_REPO: "libs-snapshot"
+                     MAVEN_RELEASE_REPO: "libs-release"
    
