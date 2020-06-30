@@ -1,0 +1,8 @@
+{
+  "files": [
+    {
+      "pattern": "target/debitcardcustomer-0.0.1-SNAPSHOT.war",
+      "target": "debit-card-application-dev"
+    }
+  ]
+}
