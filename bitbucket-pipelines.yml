@@ -1,43 +1,30 @@
-image: maven:3.3.9
+image: maven:3.6.1
 
-clone:
-  depth: full              
-definitions:
-  caches:
-    sonar: ~/.sonar/cache 
-  steps:
-    - step: &build-test-sonarcloud
-        name: Build, test and analyze on SonarCloud
-        caches:
-         - maven
-          - sonar
-        script:
-          - mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-        artifacts:
-          - target/**
-    - step: &build-test
-        name: Build and test
+pipelines:
+  default:
+    - step:
+        name: maven clean
         caches:
           - maven
         script:
-          - mvn -B verify
-           
-          - pipe: sonarsource/sonarcloud-scan:1.1.0
-            variables:
-                         SONAR_TOKEN: '$SONAR_TOKEN'
-                         SONAR_SCANNER_OPTS: '-Xmx512m'
-                         DEBUG: 'true' 
-        artifacts:
-            - target/**
-pipelines:
-  default:
-    - step: *build-test
-      
-  branches:
-    dev:
-    - step: *build-test-sonarcloud
-          
-  pull-requests:
-    '**':
-      - step: *build-test-sonarcloud
+          - mvn clean
+    - step:
+       script:   
+       - pipe: sonarsource/sonarcloud-scan:0.1.5
+         variables:
+              SONAR_TOKEN: ${SONAR_TOKEN}
+              EXTRA_ARGS: '-Dsonar.sources=src/'
+              SONAR_SCANNER_OPTS: -Xmx512m
+              DEBUG: "false"
+
+    - step:
+        name: maven package
+        caches:
+          - maven
+        script:
+          - mvn package 
+          - ls target/
+
+
+ 
    
