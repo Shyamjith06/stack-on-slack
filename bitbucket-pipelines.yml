@@ -18,12 +18,12 @@ pipelines:
            
         
     - step: &build-test-sonarcloud
-               name: Build, test and analyze on SonarCloud
-               caches:
+        name: Build, test and analyze on SonarCloud
+        caches:
                  - sonar
-               script:
+        script:
                  - mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-               artifacts:
+        artifacts:
                  - target/**
 
       pipelines:                 
