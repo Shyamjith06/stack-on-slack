@@ -9,6 +9,12 @@ pipelines:
         script:
           - mvn clean
     - step:
+            name: maven compile
+            caches:
+              - maven
+            script:
+              - mvn compile
+    - step:
             name: Sonar
             script:
               - mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
