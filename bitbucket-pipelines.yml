@@ -13,9 +13,9 @@ pipelines:
        - pipe: sonarsource/sonarcloud-scan:0.1.5
          variables:
               SONAR_TOKEN: ${SONAR_TOKEN}
-              EXTRA_ARGS: '-Dsonar.java.binaries=**/target/classes'
+              EXTRA_ARGS: -Dsonar.sources='src/main/java/' -Dsonar.java.binaries='target/classes'
               SONAR_SCANNER_OPTS: -Xmx512m
-              DEBUG: "true"
+              DEBUG: "false"
 
     - step:
         name: maven package
