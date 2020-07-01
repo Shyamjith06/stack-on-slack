@@ -22,5 +22,5 @@ pipelines:
                          MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/'
                          MAVEN_RELEASE_REPO: 'debit-card-application-dev/'
                          MAVEN_COMMAND: 'clean test install'
-                         FOLDER: 'DebitCardApp'
+                         FOLDER: './'
     
