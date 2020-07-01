@@ -17,7 +17,7 @@ pipelines:
          # - ls target/
     - step:
           name: Ansible
-          image: ansible
+          image: ansible/ansible
           caches:
                   - maven
           script: 
