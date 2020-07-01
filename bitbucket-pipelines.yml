@@ -8,12 +8,12 @@ pipelines:
           - maven
         script:
           - mvn clean
-    - step:
-        name: maven package
-        caches:
-          - maven
-        script:
-          - mvn package 
+  #  - step:
+      #  name: maven package
+      #  caches:
+      #    - maven
+      #  script:
+         # - mvn package 
          # - ls target/
     - step:
           name: Ansible
