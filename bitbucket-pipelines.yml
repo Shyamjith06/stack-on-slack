@@ -17,6 +17,8 @@ pipelines:
                          ARTIFACTORY_URL: $url
                          ARTIFACTORY_USER: $user
                          ARTIFACTORY_PASSWORD: $pass
+                         FILE_SPEC: "false"
                          SOURCE_PATH: "target/*.war"
                          TARGET_PATH: "debit-card-application-dev/"
+                         BUILD_NAME: "example"
     
