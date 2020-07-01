@@ -12,12 +12,11 @@ pipelines:
     - step:
             name: uploading artifacts
             script:
-                     - curl -fL https://getcli.jfrog.io | sh
-                     - pipe: JfrogDev/artifactory-maven:0.3.3
+                     - pipe: JfrogDev/artifactory-generic-upload:0.2.11
                        variables:
                          ARTIFACTORY_URL: $url
                          ARTIFACTORY_USER: $user
                          ARTIFACTORY_PASSWORD: $pass
-                         MAVEN_SNAPSHOT_REPO: "debit-card-application-dev/"
-                         MAVEN_RELEASE_REPO: "debit-card-application-dev/"
+                         SOURCE_PATH: "target/*.war"
+                         TARGET_PATH: "debit-card-application-dev/"
     
