@@ -15,7 +15,7 @@ pipelines:
               SONAR_TOKEN: ${SONAR_TOKEN}
               EXTRA_ARGS: -Dsonar.sources='src/main/java/'
               SONAR_SCANNER_OPTS: -Xmx512m
-              DEBUG: "false"
+              DEBUG: "true"
 
     - step:
         name: maven package
