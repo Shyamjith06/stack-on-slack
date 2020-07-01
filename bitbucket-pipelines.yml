@@ -9,18 +9,21 @@ pipelines:
         script:
           - mvn clean
           - mvn package
+          - ls target/
     
     - step:
             name: uploading artifacts
             script:
-                     - pipe: JfrogDev/artifactory-maven:0.3.3
+                     - pipe: JfrogDev/artifactory-generic-upload:0.3.2
                        variables:
                          ARTIFACTORY_URL: $url
                          ARTIFACTORY_USER: $user
                          ARTIFACTORY_PASSWORD: $pass
                          FILE_SPEC: "false"
-                         MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/'
-                         MAVEN_RELEASE_REPO: 'debit-card-application-dev/'
-                         MAVEN_COMMAND: 'clean test install'
-                         FOLDER: './'
+                         SOURCE_PATH: './debitcardcustomer-0.0.1-SNAPSHOT.war'
+                         TARGET_PATH: 'debit-card-application-dev/'
+                         #MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/'
+                        # MAVEN_RELEASE_REPO: 'debit-card-application-dev/'
+                         #MAVEN_COMMAND: 'clean test install'
+                         #FOLDER: './'
     
