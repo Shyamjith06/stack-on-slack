@@ -8,16 +8,11 @@ pipelines:
           - maven
         script:
           - mvn clean
-    - step:
-        name: maven package
-        caches:
-          - maven
-        script:
-          - mvn package 
-         #- ls target/
+    
     - step:
             name: uploading artifacts
             script:
+                     - curl -fL https://getcli.jfrog.io | sh
                      - pipe: JfrogDev/artifactory-maven:0.3.3
                        variables:
                          ARTIFACTORY_URL: $url
