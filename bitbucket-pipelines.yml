@@ -8,17 +8,21 @@ pipelines:
           - maven
         script:
           - mvn clean
-  #  - step:
-      #  name: maven package
-      #  caches:
-      #    - maven
-      #  script:
-         # - mvn package 
-         # - ls target/
     - step:
-          name: Ansible
-          image: ansible/ansible
-          caches:
-                  - maven
-          script: 
-             - ansible-playbook -i inventory -u testing playbook.yml
+        name: maven package
+        caches:
+          - maven
+        script:
+          - mvn package 
+         #- ls target/
+    - step:
+            name: uploading artifacts
+            script:
+                     - pipe: JfrogDev/artifactory-maven:0.3.3
+                       variables:
+                         ARTIFACTORY_URL: $url
+                         ARTIFACTORY_USER: $user
+                         ARTIFACTORY_PASSWORD: $pass
+                         MAVEN_SNAPSHOT_REPO: "debit-card-application-dev/"
+                         MAVEN_RELEASE_REPO: "debit-card-application-dev/"
+    
