@@ -20,10 +20,10 @@ pipelines:
                          ARTIFACTORY_USER: $user
                          ARTIFACTORY_PASSWORD: $pass
                          FILE_SPEC: "false"
-                         ##SOURCE_PATH: './target/debitcardcustomer-0.0.1-SNAPSHOT.war'
+                         #SOURCE_PATH: './target/debitcardcustomer-0.0.1-SNAPSHOT.war'
                          #TARGET_PATH: 'debit-card-application-dev/'
-                         MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/./'
-                         MAVEN_RELEASE_REPO: 'debit-card-application-dev/./'
-                         MAVEN_COMMAND: 'clean package'
+                         MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/'
+                         MAVEN_RELEASE_REPO: 'debit-card-application-dev/'
+                        
                          FOLDER: './'
     
