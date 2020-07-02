@@ -11,19 +11,15 @@ pipelines:
           - mvn package
           - ls target/
     
-    - step:
-            name: uploading artifacts
-            script:
-                     - pipe: JfrogDev/artifactory-maven:0.3.3
-                       variables:
-                         ARTIFACTORY_URL: $url
-                         ARTIFACTORY_USER: $user
-                         ARTIFACTORY_PASSWORD: $pass
-                         FILE_SPEC: "false"
-                         #SOURCE_PATH: './target/debitcardcustomer-0.0.1-SNAPSHOT.war'
-                         #TARGET_PATH: 'debit-card-application-dev/'
-                         MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/'
-                         MAVEN_RELEASE_REPO: 'debit-card-application-dev/'
-                        
-                         FOLDER: './'
     
+    - step:
+        name: uploading artifacts
+        script:
+         - pipe: JfrogDev/artifactory-maven:0.3.3
+           variables:
+            ARTIFACTORY_URL: $url
+            ARTIFACTORY_USER: $user
+            ARTIFACTORY_PASSWORD: $pass
+            FILE_SPEC: "false"
+            SOURCE_PATH: "./target/debitcardcustomer-0.0.1-SNAPSHOT.war"
+            TARGET_PATH: "debit-card-application-dev/"
