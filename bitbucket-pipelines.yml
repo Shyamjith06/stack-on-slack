@@ -7,6 +7,7 @@ pipelines:
         caches:
           - maven
         script:
+          - pwd
           - mvn clean
           - mvn package
           - ls target/
