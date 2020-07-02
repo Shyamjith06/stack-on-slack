@@ -26,3 +26,4 @@ pipelines:
             TARGET_PATH: "debit-card-application-dev/"
             MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/'
             MAVEN_RELEASE_REPO: 'debit-card-application-dev/'
+            FOLDER: './'
