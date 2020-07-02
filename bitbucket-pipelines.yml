@@ -11,6 +11,8 @@ pipelines:
           - mvn clean
           - mvn package
           - ls target/
+          - ls -la
+          - pwd
     
     
     - step:
