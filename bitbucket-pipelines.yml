@@ -20,9 +20,6 @@ pipelines:
     - step:
         name: uploading artifacts
         script:
-      
-         - curl -fL https://getcli.jfrog.io | sh
-
          - pipe: JfrogDev/artifactory-generic-upload:0.3.2
            variables:
             ARTIFACTORY_URL: $url
