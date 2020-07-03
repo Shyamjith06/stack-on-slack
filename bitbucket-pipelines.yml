@@ -26,7 +26,7 @@ pipelines:
             ARTIFACTORY_USER: $user
             ARTIFACTORY_PASSWORD: $pass
             FILE_SPEC: "false"
-            SOURCE_PATH: "/*.war"
+            SOURCE_PATH: "./*.war"
             TARGET_PATH: "debit-card-application-dev/"
             #MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/'
             #MAVEN_RELEASE_REPO: 'debit-card-application-dev/'
