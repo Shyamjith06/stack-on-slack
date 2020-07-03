@@ -26,7 +26,7 @@ pipelines:
           # Install JFrog CLI
            - curl -fL https://getcli.jfrog.io | sh
           # Configure Artifactory instance with JFrog CLI
-           - ./jfrog rt config artifactory --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password $ARTIFACTORY_PASSWORD --interactive false
+           - ./jfrog rt config artifactory --url $url --user $user --password $pass --interactive false
           # Maven command to build project
            - mvn clean install
           # Upload created artifacts to Artifactory
