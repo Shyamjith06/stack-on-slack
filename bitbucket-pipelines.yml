@@ -17,17 +17,22 @@ pipelines:
           - realpath -e target
           - cd /opt/atlassian/pipelines/agent/build/target
           - pwd
+
+
     - step:
-        name: uploading artifacts
-        script:
-         - pipe: JfrogDev/artifactory-generic-upload:0.3.2
-           variables:
-            ARTIFACTORY_URL: $url
-            ARTIFACTORY_USER: $user
-            ARTIFACTORY_PASSWORD: $pass
-            FILE_SPEC: "false"
-            SOURCE_PATH: "./*.war"
-            TARGET_PATH: "debit-card-application-dev/"
-            #MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/'
-            #MAVEN_RELEASE_REPO: 'debit-card-application-dev/'
-            #FOLDER: './'
+           name: upload artifacts
+           image: maven:3.3-jdk-8
+           script:
+          # Install JFrog CLI
+           - curl -fL https://getcli.jfrog.io | sh
+          # Configure Artifactory instance with JFrog CLI
+           - ./jfrog rt config artifactory --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --password $ARTIFACTORY_PASSWORD --interactive false
+          # Maven command to build project
+           - mvn clean install
+          # Upload created artifacts to Artifactory
+           - ./jfrog rt u "multi*/*.jar" $DEVELOPMENT_REPO_NAME --build-name=$BITBUCKET_REPO_OWNER-$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH --build-number=$BITBUCKET_BUILD_NUMBER
+           - ./jfrog rt u "multi*/*.war" $DEVELOPMENT_REPO_NAME --build-name=$BITBUCKET_REPO_OWNER-$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH --build-number=$BITBUCKET_BUILD_NUMBER
+          # Capture environment variables for build information
+           - ./jfrog rt bce $BITBUCKET_REPO_OWNER-$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH $BITBUCKET_BUILD_NUMBER
+          # Publish build information to Artifactory
+           - ./jfrog rt bp $BITBUCKET_REPO_OWNER-$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH $BITBUCKET_BUILD_NUMBER
