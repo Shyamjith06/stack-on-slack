@@ -14,7 +14,7 @@ pipelines:
           - ls -la
           - pwd
           - find "$(cd ..; pwd)" -name "target"
-          - realpath -e debitcardcustomer-0.0.1-SNAPSHOT.war
+          - realpath -e target
 
     
     
