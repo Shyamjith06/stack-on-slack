@@ -20,7 +20,7 @@ pipelines:
     - step:
         name: uploading artifacts
         script:
-         - pipe: JfrogDev/artifactory-maven:0.3.3
+         - pipe: JfrogDev/artifactory-generic-upload:0.3.2
            variables:
             ARTIFACTORY_URL: $url
             ARTIFACTORY_USER: $user
