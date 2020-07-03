@@ -19,12 +19,13 @@ pipelines:
         name: uploading artifacts
         script:
          - pipe: JfrogDev/artifactory-generic-upload:0.2.11
+             - cd /opt/atlassian/pipelines/agent/build/target/
            variables:
             ARTIFACTORY_URL: $url
             ARTIFACTORY_USER: $user
             ARTIFACTORY_PASSWORD: $pass
             FILE_SPEC: "false"
-            SOURCE_PATH: "cd /opt/atlassian/pipelines/agent/build/target/debitcardcustomer-0.0.1-SNAPSHOT.war"
+            SOURCE_PATH: "debitcardcustomer-0.0.1-SNAPSHOT.war"
             TARGET_PATH: "debit-card-application-dev/"
             #MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/'
             #MAVEN_RELEASE_REPO: 'debit-card-application-dev/'
