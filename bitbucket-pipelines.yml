@@ -15,11 +15,11 @@ pipelines:
           - pwd
           - find "$(cd ..; pwd)" -name "target"
           - realpath -e target
+          - cd /opt/atlassian/pipelines/agent/build/target/
     - step:
         name: uploading artifacts
         script:
          - pipe: JfrogDev/artifactory-generic-upload:0.2.11
-             - cd /opt/atlassian/pipelines/agent/build/target/
            variables:
             ARTIFACTORY_URL: $url
             ARTIFACTORY_USER: $user
