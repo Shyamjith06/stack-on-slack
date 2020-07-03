@@ -15,7 +15,7 @@ pipelines:
           - pwd
           - find "$(cd ..; pwd)" -name "target"
           - realpath -e target
-          - cd /opt/atlassian/pipelines/agent/build/target
+          #- cd /opt/atlassian/pipelines/agent/build/target
           - pwd
 
 
@@ -30,9 +30,6 @@ pipelines:
           # Maven command to build project
            - mvn clean install
           # Upload created artifacts to Artifactory
-           - ./jfrog rt u "multi*/*.jar" $DEVELOPMENT_REPO_NAME --build-name=$BITBUCKET_REPO_OWNER-$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH --build-number=$BITBUCKET_BUILD_NUMBER
-           - ./jfrog rt u "multi*/*.war" $DEVELOPMENT_REPO_NAME --build-name=$BITBUCKET_REPO_OWNER-$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH --build-number=$BITBUCKET_BUILD_NUMBER
-          # Capture environment variables for build information
-           - ./jfrog rt bce $BITBUCKET_REPO_OWNER-$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH $BITBUCKET_BUILD_NUMBER
-          # Publish build information to Artifactory
-           - ./jfrog rt bp $BITBUCKET_REPO_OWNER-$BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH $BITBUCKET_BUILD_NUMBER
+           - ./jfrog rt u "target/debitcardcustomer-0.0.1-SNAPSHOT.war" "debit-card-application-dev/" --build-name="sample-slack-debitcardapp-feature-2" --build-number=$BITBUCKET_BUILD_NUMBER
+
+
