@@ -15,9 +15,7 @@ pipelines:
           - pwd
           - find "$(cd ..; pwd)" -name "target"
           - realpath -e target
-
-    
-    
+          - cd
     - step:
         name: uploading artifacts
         script:
@@ -27,7 +25,7 @@ pipelines:
             ARTIFACTORY_USER: $user
             ARTIFACTORY_PASSWORD: $pass
             FILE_SPEC: "false"
-            SOURCE_PATH: "debitcardcustomer-0.0.1-SNAPSHOT.war"
+            SOURCE_PATH: "/opt/atlassian/pipelines/agent/build/target/debitcardcustomer-0.0.1-SNAPSHOT.war"
             TARGET_PATH: "debit-card-application-dev/"
             #MAVEN_SNAPSHOT_REPO: 'debit-card-application-dev/'
             #MAVEN_RELEASE_REPO: 'debit-card-application-dev/'
