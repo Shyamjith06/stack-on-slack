@@ -15,7 +15,7 @@ pipelines:
           - pwd
           - find "$(cd ..; pwd)" -name "target"
           - realpath -e target
-          - cd /opt/atlassian/pipelines/agent/build/target
+          - cd /opt/atlassian/pipelines/agent/build/target/
           - pwd
     - step:
         name: uploading artifacts
