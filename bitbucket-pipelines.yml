@@ -27,5 +27,5 @@ pipelines:
             ARTIFACTORY_USER: $user
             ARTIFACTORY_PASSWORD: $pass
             FILE_SPEC: "false"
-            SOURCE_PATH: "src/"
+            SOURCE_PATH: "target/"
             TARGET_PATH: "debit-card-application-dev/"
