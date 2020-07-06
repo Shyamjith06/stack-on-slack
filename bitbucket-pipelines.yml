@@ -15,21 +15,16 @@ pipelines:
           - pwd
           - find "$(cd ..; pwd)" -name "target"
           - realpath -e target
-          #- cd /opt/atlassian/pipelines/agent/build/target
+          - cd /opt/atlassian/pipelines/agent/build/target
           - pwd
-
-
     - step:
-           name: upload artifacts
-           image: maven:3.3-jdk-8
-           script:
-          # Install JFrog CLI
-           - curl -fL https://getcli.jfrog.io | sh
-          # Configure Artifactory instance with JFrog CLI
-           - ./jfrog rt config artifactory --url $url --user $user --password $pass --interactive false
-          # Maven command to build project
-           - mvn clean install
-          # Upload created artifacts to Artifactory
-           - ./jfrog rt u "target/debitcardcustomer-0.0.1-SNAPSHOT.war" "debit-card-application-dev/" --build-name="sample-slack-debitcardapp-feature-2" --build-number=$BITBUCKET_BUILD_NUMBER
-
-
+        name: uploading artifacts
+        script:
+         - pipe: JfrogDev/artifactory-generic-upload:0.3.2
+           variables:
+            ARTIFACTORY_URL: $url
+            ARTIFACTORY_USER: $user
+            ARTIFACTORY_PASSWORD: $pass
+            FILE_SPEC: "false"
+            SOURCE_PATH: "./debitcardcustomer-0.0.1-SNAPSHOT.war"
+            TARGET_PATH: "debit-card-application-dev/"
