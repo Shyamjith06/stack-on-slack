@@ -11,11 +11,11 @@ pipelines:
           - mvn clean
           #- mvn package
           #- ls target/
-          - ls -la
+          #- ls -la
           - pwd
-          - find "$(cd ..; pwd)" -name "target"
-          - realpath -e target
-          - cd /opt/atlassian/pipelines/agent/build/target/
+         # - find "$(cd ..; pwd)" -name "target"
+         # - realpath -e target
+         # - cd /opt/atlassian/pipelines/agent/build/target/
           - pwd
     - step:
         name: uploading artifacts
