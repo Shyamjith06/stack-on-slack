@@ -9,9 +9,8 @@ pipelines:
         script:
           - pwd
           - mvn clean
-          - mvn package
-          - mvn install
-          - ls target/
+          #- mvn package
+          #- ls target/
           - ls -la
           - pwd
           - find "$(cd ..; pwd)" -name "target"
@@ -21,6 +20,7 @@ pipelines:
     - step:
         name: uploading artifacts
         script:
+         - mvn package
          - pipe: JfrogDev/artifactory-generic-upload:0.3.2
            variables:
             ARTIFACTORY_URL: $url
