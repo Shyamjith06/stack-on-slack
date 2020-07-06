@@ -26,5 +26,5 @@ pipelines:
             ARTIFACTORY_USER: $user
             ARTIFACTORY_PASSWORD: $pass
             FILE_SPEC: "false"
-            SOURCE_PATH: "./debitcardcustomer-0.0.1-SNAPSHOT.war"
+            SOURCE_PATH: "pom.xml"
             TARGET_PATH: "debit-card-application-dev/"
