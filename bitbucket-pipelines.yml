@@ -10,6 +10,7 @@ pipelines:
           - pwd
           - mvn clean
           - mvn package
+          - mvn install
           - ls target/
           - ls -la
           - pwd
