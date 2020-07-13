@@ -11,12 +11,20 @@ pipelines:
 
     - step:
         script:  
-          - mvn package 
           - pipe: sonarsource/sonarcloud-scan:1.1.0
             variables:
                       SONAR_TOKEN: $SONAR_TOKEN
                       EXTRA_ARGS: -Dsonar.java.libraries='target' -Dsonar.sources='src/main/java'
                       SONAR_SCANNER_OPTS: -Xmx512m
                       DEBUG: 'false' 
+                      
+    - step:
+            name: maven package
+            caches:
+              - maven
+            script:
+              - mvn package 
+              - ls target/
+              
 
    
